@@ -1,0 +1,8 @@
+[2017-02-28 18:08:02,452][DEBUG][org.jboss.logging] Logging Provider: org.jboss.logging.Log4jLoggerProvider
+[2017-02-28 18:08:03,593][INFO][luminus.repl-server] nREPL server started on port 7000
+[2017-02-28 18:08:03,595][INFO][marissa.config] 
+-=[marissa started successfully using the development profile]=-
+[2017-02-28 18:08:03,641][INFO][org.xnio] XNIO version 3.4.0.Beta1
+[2017-02-28 18:08:03,735][INFO][org.xnio.nio] XNIO NIO Implementation Version 3.4.0.Beta1
+[2017-02-28 18:08:03,808][INFO][org.projectodd.wunderboss.web.Web] Registered web context /
+[2017-02-28 18:08:03,809][INFO][luminus.http-server] server started on port 3000
