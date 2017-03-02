@@ -13,3 +13,5 @@ bin/ops.vars
 TODO.org
 resources/production-config.edn
 marissa_dev.db.mv.db
+log/marissa.log
+marissa_test.db.mv.db
