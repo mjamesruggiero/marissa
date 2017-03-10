@@ -1,19 +1,23 @@
 (ns marissa.core
   (:require [ring.adapter.jetty :as jetty]
-            [ring.util.response :as response]
+            [compojure.core :as compojure]
+            [ring.util.http-response :as response]
             [ring.middleware.reload :refer [wrap-reload]]))
 
-(defn handler [request-map]
-  (response/response
-   (str "<html><body>Hey your IP is: "
-        (:remote-addr request-map)
-        " and the query string is "
-        (:query-string request-map)
-        ". <p>The headers are <br /><textarea cols=\"40\" rows=\"20\">"
-        (:headers request-map)
-        "</textarea></p></body></html>")))
+(defn response-handler [request]
+  (response/ok
+   (str
+    "<html><body>Your IP is: "
+    (:remote-addr request)
+    "</body></html>")))
 
-(defn wrap-nocache [header]
+(def handler
+  (compojure/routes
+   (compojure/GET "/" request response-handler)
+   (compojure/GET "/:id" [id] (str "<p>the id is: " id "</p>"))
+   (compojure/POST "/json" [id] (response/ok {:result id}))))
+
+(defn wrap-nocache [handler]
   (fn [request]
     (-> request
         handler
@@ -21,6 +25,6 @@
 
 (defn -main []
   (jetty/run-jetty
-   (-> handler var wrap-nocache wrap-reload)
+   (-> #'handler wrap-nocache wrap-reload)
    {:port 3000
     :join? false}))
