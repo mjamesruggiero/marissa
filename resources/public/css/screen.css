@@ -31,3 +31,16 @@ body {
   }
 }
 
+.content {
+    background: white;
+    width: 520px;
+    padding: 30px;
+}
+
+.error {
+    width: 520px;
+    padding: 30px;
+    margin-bottom: 50px;
+    position: relative;
+    background: white;
+}
