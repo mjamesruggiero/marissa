@@ -2,9 +2,14 @@
   (:require [reagent.core :as reagent :refer [atom]]
             [ajax.core :refer [GET POST]]))
 
+
 (defn send-message! [fields]
   (POST "/add-message"
-      {:params @fields
+      {:format :json
+       :headers
+       {"Accept" "application/transit+json"
+        "x-csrf-token" (.-value (.getElementById js/document "token"))}
+       :params @fields
        :handler #(.log js/console (str "response:" %))
        :error-handler #(.error js.console (str "error:" %))}))
 
@@ -14,7 +19,8 @@
     [message-form]]])
 
 (defn message-form []
-  (let [fields (atom {})]
+  (let [fields (atom {})
+        errors (atom nil)]
     (fn []
       [:div.content
        [:div.form-group
